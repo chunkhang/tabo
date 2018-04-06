@@ -1,0 +1,40 @@
+{
+
+  "name": "Tabo",
+  "version": "0.0.2",
+  "manifest_version": 2,
+
+  "developer": {
+    "name": "Marcus Mu",
+    "url": "https://github.com/chunkhang"
+  },
+
+  "description": "A minimalistic tab manager",
+  "homepage_url": "https://github.com/chunkhang/tabo",
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ],
+
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+
+  "browser_action": {
+    "default_title": "Tabo",
+    "default_icon": {
+      "16": "icons/icon.svg",
+      "32": "icons/icon.svg"
+    }
+  }
+
+
+}

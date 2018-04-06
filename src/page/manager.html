@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Tabo</title>
+  <link rel="icon" type="image/png" href="../icons/icon.svg" sizes="16x16">
+  <!-- Vue -->
+  <script src="../library/vue.js"></script>
+  <!-- Bulma -->
+  <link rel="stylesheet" href="../library/bulma.css">
+  <!-- Manager CSS -->
+  <link rel="stylesheet" type="text/css" href="manager.css">
+
+</head>
+<body>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-6 is-variable" id="vue-app">
+
+        <!-- Current Tabs -->
+
+        <div class="column">
+            <!-- Header -->
+            <div class="actions">
+            <h1 class="title is-4 primary-color">
+              Current Tabs ({{ currentItems.length }})
+            </h1>
+            <ul>
+              <li>
+                <p
+                  :class="currentActionClasses"
+                  @click="handleSaveAction()"
+                  id="save-action"
+                  title="Hotkey: <space>"
+                >Save</p>
+              </li>
+            </ul>
+          </div>
+          <hr>
+          <!-- Content -->
+          <ul id="current-list" v-if="currentItems.length != 0">
+            <li
+              is="tab-list"
+              v-for="item in currentItems"
+              :favicon="item.favicon"
+              :title="item.title"
+              :url="item.url"
+            ></li>
+          </ul>
+          <p
+            class="medium-font"
+            v-if="currentItems.length == 0"
+          >Nothing here. Try opening a few tabs.</p>
+          <!-- Card -->
+          <div class="modal" id="save-card">
+            <div
+              class="modal-background"
+              @click="hideSaveCard()"></div>
+            <div class="modal-card">
+              <section class="modal-card-body">
+                <div class="field">
+                  <div class="control">
+                    <input
+                      ref="nameInput"
+                      @keyup.enter="handleSaveCardSubmit()"
+                      @keyup.esc="hideSaveCard()"
+                      id="name-input"
+                      class="input has-text-weight-normal"
+                      type="text"
+                      placeholder="Name the session...">
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Sessions -->
+
+        <div class="column">
+          <!-- Header -->
+          <div class="actions">
+            <h1 class="title is-4 primary-color" >
+              Saved Sessions ({{ savedItems.length }})
+            </h1>
+            <ul>
+              <li>
+                <p
+                  :class="savedActionClasses"
+                  @click="handleRemoveAction()"
+                  id="remove-action"
+                  title="Hotkey: <shift>"
+                  >Remove</p>
+              </li>
+              <li>
+                <p
+                  :class="savedActionClasses"
+                  @click="handleClearAction()"
+                  id="clear-action"
+                  >Clear All</p>
+              </li>
+            </ul>
+          </div>
+          <hr>
+          <!-- Content -->
+          <ul id="saved-list">
+            <li
+              is="session-list"
+              v-for="(item, index) in savedItems"
+              :name="item.name"
+              :tabs="item.tabs"
+              :date="item.date"
+              :time="item.time"
+              :remove="item.remove"
+              @open-item="openSavedItem(index)"
+              @remove-item="removeSavedItem(index)"
+              @toggle-tabs="handleSavedItemTabs(index)"
+            ></li>
+          </ul>
+          <p
+            class="medium-font"
+            v-if="savedItems.length == 0"
+          >Nothing here. Try saving from Current Tabs.</p>
+        </div>
+
+        <!-- Settings -->
+
+        <div class="column is-one-quarter">
+          <!-- Header -->
+          <div class="actions">
+            <h1 class="title is-4 primary-color">Settings</h1>
+            <ul>
+              <li>
+                <p
+                  @click="openAboutPage()"
+                  class="medium-font has-text-weight-normal clickable"
+                >About</p>
+              </li>
+            </ul>
+          </div>
+          <hr>
+          <!-- Content -->
+          <p class="medium-font has-text-weight-normal">Coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manager JS -->
+  <script type="text/javascript" src="manager.js"></script>
+
+</body>
+</html>
+

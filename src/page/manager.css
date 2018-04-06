@@ -1,0 +1,180 @@
+/* General */
+
+body {
+  line-height: 1.2;
+}
+
+.section {
+  min-height: 100vh;
+  background-color: #2d2d2d;
+  padding-top: 35px;
+  color: #f1f1f1;
+}
+
+h1 {
+  margin-bottom: 0 !important;
+  margin-right: 10px;
+}
+
+hr {
+  margin: 15px 0;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+span {
+  display: inline-block;
+}
+
+.actions > * {
+  display: inline-block;
+}
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.actions > ul {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.actions li {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-left: 15px;
+}
+
+.medium-font {
+  font-size: 0.8rem;
+}
+.small-font {
+  font-size: 0.65rem;
+}
+
+.primary-color {
+  color: #f1f1f1;
+}
+.secondary-color {
+  color: #8f8f8f;
+}
+
+.clickable {
+  cursor: pointer;
+  -moz-user-select: none;
+}
+.clickable:hover {
+  text-decoration: underline;
+}
+.clickable:active {
+  color: #8f8f8f;
+  text-decoration: none;
+}
+
+.disabled {
+  color: #8f8f8f;
+  cursor: default;
+}
+.disabled:hover {
+  text-decoration: none;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* Current Tabs */
+
+.currentTabs {
+  display: flex;
+  justify-content: flex-start;
+}
+
+img {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+.titles {
+  display: flex;
+}
+
+a {
+  white-space: pre-wrap;
+}
+a:hover {
+  color: #f1f1f1;
+}
+
+#save-card {
+  align-items: flex-start;
+  padding-top: 25vh;
+}
+
+.modal-background {
+  background-color: #2d2d2d;
+  opacity: 0.5;
+}
+
+.modal-card {
+  width: 400px;
+}
+
+.modal-card-body {
+  padding: 0;
+  border-radius: 3px;
+}
+
+.input {
+  height: 35px;
+  background-color: #f1f1f1;
+  color: #2d2d2d;
+  border: none;
+  box-shadow: none;
+  border-radius: inherit;
+  font-size: 0.8rem;
+  padding: 20px 12px;
+}
+
+.input::-moz-placeholder {
+  font-size: 0.8rem;
+  color: #2d2d2d;
+}
+
+/* Saved Sessions */
+
+.names {
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+#saved-list > li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.removes {
+  margin-top: -2px;
+  margin-left: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+  -moz-transform: scale(1, 0.8);
+  color: #f06157;
+}
+.removes:hover {
+  color: #e62214;
+}
+
+.session-tab-lists {
+  flex-basis: 100%;
+}

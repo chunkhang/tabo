@@ -1,0 +1,17 @@
+Running Locally
+---------------
+$ web-ext run --no-reload --source-dir tabo
+
+Packaging
+---------
+$ ./package
+
+To Do
+-----
+
+Settings
+--------
+- Remove duplicate tabs
+- Confirmation dialog
+- Capitalize session names
+- Enable hotkeys
