@@ -14,7 +14,7 @@ browser.browserAction.onClicked.addListener(function() {
     if (managerTab.length == 0) {
       // Create manager tab
       browser.tabs.create({
-        url: "page/manager.html",
+        url: "manager/index.html",
         active: true
       }).then(function(tab) {
         managerTabId = tab.id;

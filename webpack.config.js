@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = {
   context: __dirname + '/src',
   entry: {
-    'background': './background/background.js',
-    'page/manager': './page/manager.js'
+    'background/background': './background/background.js',
+    'manager/index': './manager/index.js'
   },
   output: {
     path: __dirname + '/dist',
@@ -61,7 +61,7 @@ const config = {
     }),
     new CopyWebpackPlugin([
       {from: 'icons', to: 'icons', ignore: ['icon.sketch']},
-      {from: 'page/manager.html', to: 'page/manager.html'},
+      {from: 'manager/index.html', to: 'manager/index.html'},
       {from: 'manifest.json', to: 'manifest.json'}
     ]),
     new WebpackShellPlugin({
