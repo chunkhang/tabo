@@ -1,6 +1,6 @@
 Running Locally
 ---------------
-$ web-ext run --no-reload --source-dir tabo
+$ web-ext run --no-reload --source-dir dist
 
 Packaging
 ---------

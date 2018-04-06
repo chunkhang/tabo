@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = {
   context: __dirname + '/src',
   entry: {
-    'background': './background.js',
-    'popup/popup': './popup/popup.js'
+    'background': './background/background.js',
+    'page/manager': './page/manager.js'
   },
   output: {
     path: __dirname + '/dist',
@@ -60,8 +60,8 @@ const config = {
       filename: '[name].css'
     }),
     new CopyWebpackPlugin([
-      {from: 'icons', to: 'icons', ignore: ['icon.xcf']},
-      {from: 'popup/popup.html', to: 'popup/popup.html'},
+      {from: 'icons', to: 'icons', ignore: ['icon.sketch']},
+      {from: 'page/manager.html', to: 'page/manager.html'},
       {from: 'manifest.json', to: 'manifest.json'}
     ]),
     new WebpackShellPlugin({
