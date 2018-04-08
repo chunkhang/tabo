@@ -1,7 +1,7 @@
 <template>
 
   <div class="column">
-    <Header :title="headerTitle" :items="sessionItems"/>
+    <Header :title="title" :items="sessionItems" :actions="actions"/>
     <hr>
     <SessionList :items="sessionItems"/>
     <p v-if="sessionItems.length == 0">{{ fallbackText }}</p>
@@ -21,27 +21,27 @@ export default {
   },
   data: function() {
     return {
-      headerTitle: "Sessions",
-      sessionItems: [
+      title: "Sessions",
+      sessionItems: [],
+      actions: [
         {
-          name: "Apple",
-          date: "2018/04/06",
-          time: "19:30:01",
-          tabs: [
-            {
-              favicon: "https://www.google.com/images/branding/product/ico/googleg_lodp.ico",
-              url: "httasd",
-              title: "Google Me"
-            },
-            {
-              favicon: "https://www.google.com/images/branding/product/ico/googleg_lodp.ico",
-              url: "httasd",
-              title: "Google Me"
-            }
-          ]
+          name: "Remove",
+          click: this.handleRemove
         },
+        {
+          name: "Clear All",
+          click: this.handleClearAll
+        }
       ],
       fallbackText: "Nothing here. Try saving from Tabs."
+    }
+  },
+  methods: {
+    handleRemove: function() {
+      console.log("Remove!");
+    },
+    handleClearAll: function() {
+      console.log("Clear All!");
     }
   }
 }

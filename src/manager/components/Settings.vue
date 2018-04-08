@@ -1,10 +1,7 @@
 <template>
 
   <div class="column is-one-quarter">
-    <Header
-      :title="headerTitle"
-      :actions="headerActions"
-      :items="settingItems"/>
+    <Header :title="title" :actions="actions"/>
     <hr>
     <p>{{ text }}</p>
   </div>
@@ -21,19 +18,17 @@ export default {
   },
   data: function() {
     return {
-      headerTitle: "Settings",
-      headerActions: [
+      title: "Settings",
+      actions: [
         {
           name: "About",
           click: this.handleAbout
         }
       ],
-      settingItems: null,
       text: "Coming soon."
     }
   },
   methods: {
-    // Open about page in new tab
     handleAbout: function() {
       var url = "https://github.com/chunkhang/tabo";
       window.open(url, "_blank");

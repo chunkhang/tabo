@@ -1,7 +1,7 @@
 <template>
 
   <div class="column">
-    <Header :title="headerTitle" :items="tabItems"/>
+    <Header :title="title" :items="tabItems" :actions="actions"/>
     <hr>
     <TabList :items="tabItems"/>
     <p v-if="tabItems.length == 0">{{ fallbackText }}</p>
@@ -24,8 +24,14 @@ export default {
   },
   data: function() {
     return {
-      headerTitle: "Tabs",
+      title: "Tabs",
       tabItems: [],
+      actions: [
+        {
+          name: "Save",
+          click: this.handleSave
+        }
+      ],
       fallbackText: "Nothing here. Try opening a few tabs."
     }
   },
@@ -59,6 +65,9 @@ export default {
         });
         vue.tabItems = tabList;
       });
+    },
+    handleSave: function() {
+      console.log("Save!");
     }
   }
 }

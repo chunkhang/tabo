@@ -1,6 +1,6 @@
 <template>
 
-  <ul v-if="items.length != 0">
+  <ul>
     <li v-for="item in items">
       <div>
         <img :src="item.favicon">
