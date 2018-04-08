@@ -9,7 +9,7 @@ browser.browserAction.onClicked.addListener(function() {
     var managerTab = tabs.filter(tab =>
       tab.id == managerTabId && tab.title.startsWith("Tabo") &&
       tab.url.startsWith("moz-extension://") &&
-      tab.url.endsWith("/page/manager.html")
+      tab.url.endsWith("/manager/index.html")
     );
     if (managerTab.length == 0) {
       // Create manager tab
