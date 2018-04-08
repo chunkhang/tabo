@@ -2,7 +2,7 @@
 
   <div class="actions">
     <h1 class="title is-4">
-      {{ title }} ({{ items.length }})
+      {{ title }} <span v-if="items">({{ items.length }})</span>
     </h1>
   </div>
   <!-- <ActionList :actions="actionItems"/> -->

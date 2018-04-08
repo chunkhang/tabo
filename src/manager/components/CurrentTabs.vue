@@ -4,9 +4,7 @@
     <Header :title="headerTitle" :items="currentItems"/>
     <hr>
     <TabList :items="currentItems"/>
-    <p v-if="currentItems.length == 0">
-      Nothing here. Try opening a few tabs.
-    </p>
+    <p class="fallbacks" v-if="currentItems.length == 0">{{ fallbackText }}</p>
     <!-- <Card/> -->
   </div>
 
@@ -27,7 +25,8 @@ export default {
   data: function() {
     return {
       headerTitle: "Current Tabs",
-      currentItems: []
+      currentItems: [],
+      fallbackText: "Nothing here. Try opening a few tabs."
     }
   },
   created: function() {
@@ -65,16 +64,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss" scoped>
-
-@import "../variables.scss";
-
-hr {
-  margin: 15px 0;
-}
-p {
-  font-size: $medium-font;
-}
-
-</style>

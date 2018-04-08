@@ -4,8 +4,8 @@
     <div class="container">
       <div class="columns is-6 is-variable">
         <CurrentTabs/>
-        <!-- <SavedSessions/> -->
-        <!-- <Settings/> -->
+        <SavedSessions/>
+        <Settings/>
     </div>
   </section>
 
@@ -14,14 +14,12 @@
 <script>
 
 import CurrentTabs from "./components/CurrentTabs.vue";
-// import SavedSessions from "./components/SavedSessions.vue";
-// import Settings from "./components/Settings.vue";
+import Settings from "./components/Settings.vue";
 
 export default {
   components: {
     CurrentTabs,
-    // SavedSessions,
-    // Settings
+    Settings
   }
 }
 
@@ -41,8 +39,14 @@ body {
   padding-top: 35px;
   min-height: 100vh;
 }
+hr {
+  margin: 15px 0;
+}
 li {
   margin-bottom: 12px;
+}
+.fallbacks {
+  font-size: $medium-font;
 }
 .clickable {
   cursor: pointer;
