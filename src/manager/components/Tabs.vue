@@ -5,7 +5,7 @@
     <hr>
     <TabList :items="tabItems"/>
     <p v-if="tabItems.length == 0">{{ fallbackText }}</p>
-    <!-- <Card/> -->
+    <InputCard/>
   </div>
 
 </template>
@@ -14,41 +14,48 @@
 
 import Header from "./Header.vue";
 import TabList from "./TabList.vue";
-// import Card from "./Card.vue";
+import InputCard from "./InputCard.vue";
 
 export default {
   components: {
     Header,
     TabList,
-    // Card
+    InputCard
   },
   data: function() {
     return {
       title: "Tabs",
       tabItems: [],
-      actions: [
-        {
-          name: "Save",
-          click: this.handleSave
+      actions: {
+        "Save": {
+          handle: this.handleSave,
+          disabled: true
         }
-      ],
+      },
       fallbackText: "Nothing here. Try opening a few tabs."
     }
   },
   created: function() {
-    // Reactive current tabs
+    // Reactive tabs
     var vue = this;
-    vue.updateCurrentItems();
+    vue.updateTabItems();
     browser.tabs.onUpdated.addListener(function() {
-      vue.updateCurrentItems();
+      vue.updateTabItems();
     });
     browser.tabs.onRemoved.addListener(function() {
-      setTimeout(vue.updateCurrentItems, 500);
+      setTimeout(vue.updateTabItems, 500);
+    });
+    // Hotkey
+    window.addEventListener("keydown", function(event) {
+      // Space
+      if (event.keyCode == 32) {
+        vue.handleSave();
+      }
     });
   },
   methods: {
-    // Refresh tabs
-    updateCurrentItems: function() {
+    updateTabItems: function() {
+      // Update tab list with new items
       var vue = this;
       browser.tabs.query({
         currentWindow: true
@@ -64,10 +71,21 @@ export default {
           };
         });
         vue.tabItems = tabList;
+        // Enable or disable save action
+        if (tabList.length == 0) {
+          vue.actions["Save"].disabled = true;
+        } else {
+          vue.actions["Save"].disabled = false;
+        }
       });
     },
     handleSave: function() {
-      console.log("Save!");
+      // Show input card
+      if (!this.actions["Save"].disabled) {
+        card.classList.add("is-active");
+        cardInput.value = "";
+        cardInput.focus();
+      }
     }
   }
 }

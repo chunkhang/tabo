@@ -5,10 +5,18 @@
       {{ title }} <span v-if="items">({{ items.length }})</span>
     </h1>
     <ul>
-      <li v-for="action in actions">
-        <p @click="action.click" class="has-text-weight-normal clickable">
-          {{ action.name }}
-        </p>
+      <li v-for="(action, name) in actions">
+        <p
+          @click="action.handle()"
+          :class="
+            [
+              'has-text-weight-normal clickable',
+              {
+                'disabled': action.disabled
+              }
+            ]
+          "
+        >{{ name }}</p>
       </li>
     </ul>
   </div>
@@ -51,6 +59,14 @@ div {
       display: inline-block;
       margin-bottom: 0;
       margin-left: 15px;
+    }
+
+    .disabled {
+      color: $grey;
+      cursor: not-allowed;
+      &:hover {
+        text-decoration: none;
+      }
     }
 
   }

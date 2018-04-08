@@ -23,16 +23,16 @@ export default {
     return {
       title: "Sessions",
       sessionItems: [],
-      actions: [
-        {
-          name: "Remove",
-          click: this.handleRemove
+      actions: {
+        "Remove": {
+          handle: this.handleRemove,
+          disabled: true
         },
-        {
-          name: "Clear All",
-          click: this.handleClearAll
+        "Clear All": {
+          handle: this.handleClearAll,
+          disabled: true
         }
-      ],
+      },
       fallbackText: "Nothing here. Try saving from Tabs."
     }
   },

@@ -1,53 +1,5 @@
-/* General */
-
-
-.disabled {
-  color: #8f8f8f;
-  cursor: default;
-}
-.disabled:hover {
-  text-decoration: none;
-}
 
 .active {
   text-decoration: underline;
-}
-
-
-/* Current Tabs */
-
-#save-card {
-  align-items: flex-start;
-  padding-top: 25vh;
-}
-
-.modal-background {
-  background-color: #2d2d2d;
-  opacity: 0.5;
-}
-
-.modal-card {
-  width: 400px;
-}
-
-.modal-card-body {
-  padding: 0;
-  border-radius: 3px;
-}
-
-.input {
-  height: 35px;
-  background-color: #f1f1f1;
-  color: #2d2d2d;
-  border: none;
-  box-shadow: none;
-  border-radius: inherit;
-  font-size: 0.8rem;
-  padding: 20px 12px;
-}
-
-.input::-moz-placeholder {
-  font-size: 0.8rem;
-  color: #2d2d2d;
 }
 

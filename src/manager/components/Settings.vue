@@ -19,12 +19,12 @@ export default {
   data: function() {
     return {
       title: "Settings",
-      actions: [
-        {
-          name: "About",
-          click: this.handleAbout
+      actions: {
+        "About": {
+          handle: this.handleAbout,
+          disabled: true
         }
-      ],
+      },
       text: "Coming soon."
     }
   },
