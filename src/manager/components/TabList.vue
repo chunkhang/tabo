@@ -34,19 +34,24 @@ export default {
 div {
   display: flex;
   justify-content: flex-start;
-}
-img {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-}
-span {
-  display: flex;
-}
-a {
-  font-size: $medium-font;
-  color: $white;
-  white-space: pre-wrap;
+
+  img {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+
+  span {
+    display: flex;
+
+    a {
+      font-size: $medium-font;
+      color: $white;
+      white-space: pre-wrap;
+    }
+
+  }
+
 }
 
 </style>

@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     // Refresh tabs
-    updateCurrentItems() {
+    updateCurrentItems: function() {
       var vue = this;
       browser.tabs.query({
         currentWindow: true

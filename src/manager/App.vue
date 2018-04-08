@@ -34,32 +34,38 @@ export default {
 
 body {
   line-height: 1.2;
-}
-.section {
-  color: $white;
-  background-color: $black;
-  padding-top: 35px;
-  min-height: 100vh;
-}
-hr {
-  margin: 15px 0;
-}
-li {
-  margin-bottom: 12px;
-}
-p {
-  font-size: $medium-font;
-}
-.clickable {
-  cursor: pointer;
-  -moz-user-select: none;
-  &:hover {
-    text-decoration: underline;
+
+  .section {
+    color: $white;
+    background-color: $black;
+    padding-top: 35px;
+    min-height: 100vh;
   }
-  &:active {
-    color: $grey;
-    text-decoration: none;
+
+  hr {
+    margin: 15px 0;
   }
+
+  li {
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: $medium-font;
+  }
+
+  .clickable {
+    cursor: pointer;
+    -moz-user-select: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      color: $grey;
+      text-decoration: none;
+    }
+  }
+
 }
 
 </style>

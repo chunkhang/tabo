@@ -27,20 +27,19 @@ export default {
           name: "Apple",
           date: "2018/04/06",
           time: "19:30:01",
-          tabs: [1, 2, 3]
+          tabs: [
+            {
+              favicon: "https://www.google.com/images/branding/product/ico/googleg_lodp.ico",
+              url: "httasd",
+              title: "Google Me"
+            },
+            {
+              favicon: "https://www.google.com/images/branding/product/ico/googleg_lodp.ico",
+              url: "httasd",
+              title: "Google Me"
+            }
+          ]
         },
-        {
-          name: "Apple",
-          date: "2018/04/06",
-          time: "19:30:01",
-          tabs: [1, 2, 3]
-        },
-        {
-          name: "Apple",
-          date: "2018/04/06",
-          time: "19:30:01",
-          tabs: [1, 2, 3]
-        }
       ],
       fallbackText: "Nothing here. Try saving from Tabs."
     }

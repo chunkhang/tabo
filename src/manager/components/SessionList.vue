@@ -19,18 +19,10 @@
         @click="$emit('remove-item')"
         class="crosses has-text-weight-normal"
       >x</p>
-      <!-- <div class="session-tab-lists hide"> -->
-      <!--   <hr> -->
-      <!--   <ul> -->
-      <!--     <li -->
-      <!--       is="tab-list" -->
-      <!--       v-for="item in tabs" -->
-      <!--       :favicon="item.favicon" -->
-      <!--       :title="item.title" -->
-      <!--       :url="item.url" -->
-      <!--     ></li> -->
-      <!--   </ul> -->
-      <!-- </div> -->
+      <div class="tabLists hide">
+        <hr>
+        <TabList :items="item.tabs"/>
+      </div>
     </li>
   </ul>
 
@@ -38,7 +30,12 @@
 
 <script>
 
+import TabList from "./TabList.vue";
+
 export default {
+  components: {
+    TabList
+  },
   props: [
     "items",
     "removing"
@@ -65,32 +62,42 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-}
-.subtitles {
-  margin-top: 3px;
-  font-size: $small-font;
-  color: $grey;
-}
-span {
-  color: $white;
-}
-.hide {
-  display: none !important;
-}
-.crosses {
-  margin-top: -2px;
-  margin-left: 10px;
-  font-size: $big-font;
-  cursor: pointer;
-  line-height: 1;
-  -moz-transform: scale(1, 0.8);
-  color: $red;
-  &:hover {
-    color: $bright-red;
-  }
-  &:active {
+
+  .subtitles {
+    margin-top: 3px;
+    font-size: $small-font;
     color: $grey;
+
+    span {
+      color: $white;
+    }
+
   }
+
+  .crosses {
+    margin-top: -2px;
+    margin-left: 10px;
+    font-size: $big-font;
+    cursor: pointer;
+    line-height: 1;
+    -moz-transform: scale(1, 0.8);
+    color: $red;
+    &:hover {
+      color: $bright-red;
+    }
+    &:active {
+      color: $grey;
+    }
+  }
+
+  .tabLists {
+    flex-basis: 100%;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
 }
 
 </style>

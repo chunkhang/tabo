@@ -1,32 +1,6 @@
 /* General */
 
 
-span {
-  display: inline-block;
-}
-
-.actions > * {
-  display: inline-block;
-}
-.actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.actions > ul {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-.actions li {
-  display: inline-block;
-  margin-bottom: 0;
-  margin-left: 15px;
-}
-
-
-
-
 .disabled {
   color: #8f8f8f;
   cursor: default;
@@ -77,9 +51,3 @@ span {
   color: #2d2d2d;
 }
 
-
-------
-
-.session-tab-lists {
-  flex-basis: 100%;
-}
