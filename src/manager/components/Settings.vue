@@ -3,7 +3,7 @@
   <div class="column is-one-quarter">
     <Header :title="headerTitle" :items="settingItems"/>
     <hr>
-    <p class="fallbacks">{{ text }}</p>
+    <p>{{ text }}</p>
   </div>
 
 </template>

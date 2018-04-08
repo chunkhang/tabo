@@ -1,10 +1,10 @@
 <template>
 
   <div class="column">
-    <Header :title="headerTitle" :items="currentItems"/>
+    <Header :title="headerTitle" :items="tabItems"/>
     <hr>
-    <TabList :items="currentItems"/>
-    <p class="fallbacks" v-if="currentItems.length == 0">{{ fallbackText }}</p>
+    <TabList :items="tabItems"/>
+    <p v-if="tabItems.length == 0">{{ fallbackText }}</p>
     <!-- <Card/> -->
   </div>
 
@@ -24,8 +24,8 @@ export default {
   },
   data: function() {
     return {
-      headerTitle: "Current Tabs",
-      currentItems: [],
+      headerTitle: "Tabs",
+      tabItems: [],
       fallbackText: "Nothing here. Try opening a few tabs."
     }
   },
@@ -57,7 +57,7 @@ export default {
             url: tab.url
           };
         });
-        vue.currentItems = tabList;
+        vue.tabItems = tabList;
       });
     }
   }

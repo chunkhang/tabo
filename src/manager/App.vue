@@ -3,8 +3,8 @@
   <section class="section">
     <div class="container">
       <div class="columns is-6 is-variable">
-        <CurrentTabs/>
-        <SavedSessions/>
+        <Tabs/>
+        <Sessions/>
         <Settings/>
     </div>
   </section>
@@ -13,12 +13,14 @@
 
 <script>
 
-import CurrentTabs from "./components/CurrentTabs.vue";
+import Tabs from "./components/Tabs.vue";
+import Sessions from "./components/Sessions.vue"
 import Settings from "./components/Settings.vue";
 
 export default {
   components: {
-    CurrentTabs,
+    Tabs,
+    Sessions,
     Settings
   }
 }
@@ -45,7 +47,7 @@ hr {
 li {
   margin-bottom: 12px;
 }
-.fallbacks {
+p {
   font-size: $medium-font;
 }
 .clickable {

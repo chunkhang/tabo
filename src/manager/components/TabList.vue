@@ -1,10 +1,10 @@
 <template>
 
-  <ul id="current-list" v-if="items.length != 0">
+  <ul v-if="items.length != 0">
     <li v-for="item in items">
-      <div class="items">
+      <div>
         <img :src="item.favicon">
-        <span class="titles">
+        <span>
           <a
             :href="item.url"
             target="_blank"
@@ -31,7 +31,7 @@ export default {
 
 @import "../variables.scss";
 
-.items {
+div {
   display: flex;
   justify-content: flex-start;
 }
@@ -40,7 +40,7 @@ img {
   height: 18px;
   margin-right: 10px;
 }
-.titles {
+span {
   display: flex;
 }
 a {
