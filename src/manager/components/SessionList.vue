@@ -74,11 +74,7 @@ export default {
   methods: {
     // Handler function for click on session name
     handleClickName: function(index) {
-      // Open session tabs
-      var urls = this.items[index].tabs.map(tab => tab.url);
-      browser.windows.create({
-        url: urls
-      });
+      Bus.$emit("sessions-open");
     },
     // Handler function for click on session number of tabs
     handleClickTab: function(index) {
@@ -104,8 +100,8 @@ export default {
       this.showingTabs = !this.showingTabs;
     },
     // Handler function for click on session cross
-    handleClickCross: function() {
-
+    handleClickCross: function(index) {
+      Bus.$emit("sessions-remove", index);
     }
   }
 }

@@ -53,7 +53,9 @@ export default {
   },
   mounted: function() {
     var vue = this;
+    Bus.$on("sessions-open", vue.openSession);
     Bus.$on("sessions-save", vue.saveSession);
+    Bus.$on("sessions-remove", vue.removeSession);
     Bus.$on("sessions-enable-remove", function() {
       vue.actions["Remove"].disabled = false;
     });
@@ -83,15 +85,16 @@ export default {
     // Handler function for clear all action
     handleClearAll: function() {
       if (!this.actions["Clear All"].disabled) {
-        // Clear session items
-        this.sessionItems = [];
-        // Disable actions
-        Bus.$emit("sessions-disable-remove");
-        Bus.$emit("sessions-disable-clear-all");
-        // Cancel removing action
-        Bus.$emit("sessions-stop-removing");
-        // Helper.storeSessions(vue.sessionItems);
+        this.clearSessions();
       }
+    },
+    // Open session
+    openSession: function(index) {
+      // Open tabs under session
+      var urls = this.items[index].tabs.map(tab => tab.url);
+      browser.windows.create({
+        url: urls
+      });
     },
     // Save new session
     saveSession: function(sessionName, tabItems) {
@@ -108,6 +111,32 @@ export default {
       // Enable actions
       Bus.$emit("sessions-enable-remove");
       Bus.$emit("sessions-enable-clear-all");
+      // Helper.storeSessions(vue.sessionItems);
+    },
+    // Remove session
+    removeSession: function(index) {
+      // Remove session item
+      this.sessionItems.splice(index, 1);
+      if (this.sessionItems.length == 0) {
+        // Deactivate remove action
+        this.actions["Remove"].active = false;
+        // Disable actions
+        Bus.$emit("sessions-disable-remove");
+        Bus.$emit("sessions-disable-clear-all");
+        // Cancel removing action
+        Bus.$emit("sessions-stop-removing");
+      }
+      // Helper.storeSessions(vue.sessionItems);
+    },
+    // Clear sessions
+    clearSessions: function() {
+      // Empty session items
+      this.sessionItems = [];
+      // Disable actions
+      Bus.$emit("sessions-disable-remove");
+      Bus.$emit("sessions-disable-clear-all");
+      // Cancel removing action
+      Bus.$emit("sessions-stop-removing");
       // Helper.storeSessions(vue.sessionItems);
     }
   }
