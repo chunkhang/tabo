@@ -62,12 +62,14 @@ export default {
       console.log("Remove!");
     },
     handleClearAll: function() {
-      // Clear session items
-      this.sessionItems = [];
-      // Disable actions
-      Bus.$emit("sessions-disable-remove");
-      Bus.$emit("sessions-disable-clear-all");
-      // Helper.storeSessions(vue.sessionItems);
+      if (!this.actions["Clear All"].disabled) {
+        // Clear session items
+        this.sessionItems = [];
+        // Disable actions
+        Bus.$emit("sessions-disable-remove");
+        Bus.$emit("sessions-disable-clear-all");
+        // Helper.storeSessions(vue.sessionItems);
+      }
     },
     saveSession: function(sessionName, tabItems) {
       // Add session to session items
