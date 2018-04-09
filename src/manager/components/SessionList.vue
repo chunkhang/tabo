@@ -50,6 +50,18 @@ export default {
     "items",
     "removing"
   ],
+  created: function() {
+    // Hotkey
+    var vue = this;
+    window.addEventListener("keydown", function(event) {
+      // Escape
+      if (event.keyCode == 27) {
+        if (vue.showingTabs) {
+          vue.handleClickTab();
+        }
+      }
+    });
+  },
   filters: {
     pluralize: function(count) {
       var noun = "tab";
