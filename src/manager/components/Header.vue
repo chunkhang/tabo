@@ -62,10 +62,6 @@ div {
       margin-left: 15px;
     }
 
-    .active {
-      text-decoration: underline;
-    }
-
     .disabled {
       color: $grey;
       cursor: not-allowed;

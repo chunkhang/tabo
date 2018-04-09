@@ -66,6 +66,10 @@ body {
     }
   }
 
+  .active {
+    text-decoration: underline;
+  }
+
 }
 
 </style>

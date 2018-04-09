@@ -57,11 +57,19 @@ export default {
   },
   mounted: function() {
     var vue = this;
+    Bus.$on("tabs-save", function(name) {
+      Bus.$emit("sessions-save", name, vue.tabItems);
+    });
     Bus.$on("tabs-deactivate-save", function() {
       vue.actions["Save"].active = false;
     });
-    Bus.$on("tabs-save", function(name) {
-      Bus.$emit("sessions-save", name, vue.tabItems);
+    Bus.$on("tabs-enable-save", function() {
+      if (vue.tabItems.length >= 1) {
+        vue.actions["Save"].disabled = false;
+      }
+    });
+    Bus.$on("tabs-disable-save", function() {
+      vue.actions["Save"].disabled = true;
     });
   },
   methods: {

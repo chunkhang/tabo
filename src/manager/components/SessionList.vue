@@ -1,25 +1,29 @@
 <template>
 
-  <ul>
-    <li v-for="item in items" class="items">
+  <ul id="sessionList">
+    <li
+      v-for="(item, index) in items"
+      :class="['items', {'hide': item.hide}]"
+    >
       <div>
         <p
-          @click="$emit('open-item')"
+          @click="handleClickName(index)"
           class="has-text-weight-normal clickable"
         >{{ item.name }}</p>
         <p class="subtitles has-text-weight-light">
           <span
-            @click="$emit('toggle-tabs')"
-            class="clickable"
+            @click="handleClickTab(index)"
+           :class="['clickable', {'active': showingTabs}]"
           >{{ item.tabs.length | pluralize }}</span>
           @ {{ item.date }} {{ item.time }}
         </p>
       </div>
       <p
-        @click="$emit('remove-item')"
+        v-if="removing"
+        @click="handleClickCross(index)"
         class="crosses has-text-weight-normal"
       >x</p>
-      <div class="tabLists hide">
+      <div :class="['tabLists', {'hide': !showingTabs}]">
         <hr>
         <TabList :items="item.tabs"/>
       </div>
@@ -30,11 +34,17 @@
 
 <script>
 
+import Bus from "../EventBus.js";
 import TabList from "./TabList.vue";
 
 export default {
   components: {
     TabList
+  },
+  data: function() {
+    return {
+      showingTabs: false
+    }
   },
   props: [
     "items",
@@ -47,6 +57,41 @@ export default {
         noun += "s";
       }
       return `${count} ${noun}`;
+    }
+  },
+  methods: {
+    // Handler function for click on session name
+    handleClickName: function(index) {
+      // Open session tabs
+      var urls = this.items[index].tabs.map(tab => tab.url);
+      browser.windows.create({
+        url: urls
+      });
+    },
+    // Handler function for click on session number of tabs
+    handleClickTab: function(index) {
+      if (!this.showingTabs) {
+        // Show only clicked session
+        this.items.forEach(item => item.hide = true);
+        this.items[index].hide = false;
+        // Disable actions
+        Bus.$emit("tabs-disable-save");
+        Bus.$emit("sessions-disable-remove");
+        Bus.$emit("sessions-disable-clear-all");
+      } else {
+        // Show all sessions
+        this.items.forEach(item => item.hide = false);
+        // Enable actions
+        Bus.$emit("tabs-enable-save");
+        Bus.$emit("sessions-enable-remove");
+        Bus.$emit("sessions-enable-clear-all");
+      }
+      // Show or hide tabs for session
+      this.showingTabs = !this.showingTabs;
+    },
+    // Handler function for click on session cross
+    handleClickCross: function() {
+
     }
   }
 }
@@ -94,10 +139,10 @@ export default {
     flex-basis: 100%;
   }
 
-  .hide {
-    display: none !important;
-  }
+}
 
+.hide {
+  display: none !important;
 }
 
 </style>
