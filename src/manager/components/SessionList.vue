@@ -90,6 +90,8 @@ export default {
         Bus.$emit("tabs-disable-save");
         Bus.$emit("sessions-disable-remove");
         Bus.$emit("sessions-disable-clear-all");
+        // Cancel removing action
+        Bus.$emit("sessions-stop-removing");
       } else {
         // Show all sessions
         this.items.forEach(item => item.hide = false);

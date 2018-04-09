@@ -41,11 +41,25 @@ export default {
       fallbackText: "Nothing here. Try saving from Tabs."
     }
   },
+  created: function() {
+    // Hotkey
+    var vue = this;
+    window.addEventListener("keydown", function(event) {
+      // Shift
+      if (event.keyCode == 16) {
+        vue.handleRemove();
+      }
+    });
+  },
   mounted: function() {
     var vue = this;
     Bus.$on("sessions-save", vue.saveSession);
     Bus.$on("sessions-enable-remove", function() {
       vue.actions["Remove"].disabled = false;
+    });
+    Bus.$on("sessions-stop-removing", function() {
+      vue.actions["Remove"].active = false;
+      vue.removingSessionItems = false;
     });
     Bus.$on("sessions-enable-clear-all", function() {
       vue.actions["Clear All"].disabled = false;
@@ -58,9 +72,15 @@ export default {
     });
   },
   methods: {
+    // Handler function for remove action
     handleRemove: function() {
-      console.log("Remove!");
+      if (!this.actions["Remove"].disabled) {
+        // Toggle removing sessions
+        this.actions["Remove"].active = !this.actions["Remove"].active;
+        this.removingSessionItems = !this.removingSessionItems;
+      }
     },
+    // Handler function for clear all action
     handleClearAll: function() {
       if (!this.actions["Clear All"].disabled) {
         // Clear session items
@@ -68,9 +88,12 @@ export default {
         // Disable actions
         Bus.$emit("sessions-disable-remove");
         Bus.$emit("sessions-disable-clear-all");
+        // Cancel removing action
+        Bus.$emit("sessions-stop-removing");
         // Helper.storeSessions(vue.sessionItems);
       }
     },
+    // Save new session
     saveSession: function(sessionName, tabItems) {
       // Add session to session items
       var vue = this;
