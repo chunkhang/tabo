@@ -22,6 +22,7 @@ export default {
       actions: {
         "About": {
           handle: this.handleAbout,
+          active: false,
           disabled: true
         }
       },

@@ -12,6 +12,7 @@
             [
               'has-text-weight-normal clickable',
               {
+                'active': action.active,
                 'disabled': action.disabled
               }
             ]
@@ -59,6 +60,10 @@ div {
       display: inline-block;
       margin-bottom: 0;
       margin-left: 15px;
+    }
+
+    .active {
+      text-decoration: underline;
     }
 
     .disabled {

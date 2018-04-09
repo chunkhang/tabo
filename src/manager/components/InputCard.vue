@@ -8,7 +8,7 @@
           <div class="control">
             <input
               ref="nameInput"
-              @keyup.enter="handleSaveCardSubmit()"
+              @keyup.enter="handleEnter()"
               @keyup.esc="hideCard()"
               id="cardInput"
               class="input has-text-weight-normal"
@@ -24,6 +24,9 @@
 
 <script>
 
+import Bus from "../EventBus.js";
+import Helper from "../Helper.js";
+
 export default {
   data: function() {
     return {
@@ -31,8 +34,19 @@ export default {
     }
   },
   methods: {
+    // Hide input card
     hideCard: function() {
       card.classList.remove("is-active");
+      Bus.$emit("tabs-deactivate-save");
+    },
+    // Handler function for enter keypress
+    handleEnter: function() {
+      var name = cardInput.value.trim();
+      if (name != "") {
+        name = Helper.capitalize(name);
+        Bus.$emit("tabs-save", name);
+        this.hideCard();
+      }
     }
   }
 }

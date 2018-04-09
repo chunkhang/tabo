@@ -12,6 +12,7 @@
 
 <script>
 
+import Bus from "../EventBus.js";
 import Header from "./Header.vue";
 import TabList from "./TabList.vue";
 import InputCard from "./InputCard.vue";
@@ -29,6 +30,7 @@ export default {
       actions: {
         "Save": {
           handle: this.handleSave,
+          active: false,
           disabled: true
         }
       },
@@ -53,9 +55,18 @@ export default {
       }
     });
   },
+  mounted: function() {
+    var vue = this;
+    Bus.$on("tabs-deactivate-save", function() {
+      vue.actions["Save"].active = false;
+    });
+    Bus.$on("tabs-save", function(name) {
+      Bus.$emit("sessions-save", name, vue.tabItems);
+    });
+  },
   methods: {
+    // Update tab list with new items
     updateTabItems: function() {
-      // Update tab list with new items
       var vue = this;
       browser.tabs.query({
         currentWindow: true
@@ -79,12 +90,14 @@ export default {
         }
       });
     },
+    // Handler function for save action
     handleSave: function() {
-      // Show input card
-      if (!this.actions["Save"].disabled) {
+      if (!this.actions["Save"].active && !this.actions["Save"].disabled) {
+        // Show input card
         card.classList.add("is-active");
         cardInput.value = "";
         cardInput.focus();
+        this.actions["Save"].active = true;
       }
     }
   }
