@@ -25,14 +25,14 @@ Not available
 
 To use Tabo, click the toolbar icon located at the top-right corner of the browser. This will open up the page where all actions are performed. Below is the list of all possible actions for each section of the page.
 
-### Current Tabs
+### Tabs
 - **Open individual tab**
     - Click on any tab title
 - **Save session**
     - Click "Save", *or*
     - Press \<space\>
 
-### Saved Sessions
+### Sessions
 - **Load session**
     - Click on any session title
 - **View tabs for session**
@@ -67,6 +67,9 @@ No.
 
 ### Is there something wrong with the versioning?
 No.
+
+### How do I search for a particular session?
+Press \<cmd/ctrl\>\<f\>.
 
 ### When is settings going to be implemented?
 I do things when I feel like it.
