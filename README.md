@@ -1,4 +1,4 @@
-# <sub><img src="tabo/icons/icon.svg" width=42px height=42px></sub> Tabo
+# <sub><img src="src/icons/icon.svg" width=42px height=42px></sub> Tabo
 
 [![Version][version-badge]][changelog]
 
@@ -6,7 +6,7 @@
 
 The Web is a vast sea of information. Many a time, we find ourselves following hyperlink after hyperlink, quickly overwhelmed by the ridiculous amount of tabs in the browser. This is where a tab manager can make life easier. Tabo allows you to save all currently-open tabs as a session. This session can then be loaded to open up the saved tabs in a new window. Now, you can safely kill tabs with the luxury of visiting them only when they are needed once more. With that, my only hope is that Tabo brings you peace of mind when browsing.  
 
-![Screenshot](https://user-images.githubusercontent.com/12708862/38355457-873721b8-38ef-11e8-931f-33f845ba4afd.png)
+![Screenshot][screenshot]
 
 ## Installation
 
@@ -83,6 +83,7 @@ Feel free to suggest features or report bugs.
 **Marcus Mu** chunkhang@gmail.com
 
 [version-badge]: https://img.shields.io/amo/v/tabo.svg
+[screenshot]: https://user-images.githubusercontent.com/12708862/38530672-68db0704-3c9e-11e8-8572-ad83e4f9b3da.png
 [get-add-on-button]: https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_2.png
 [add-on-page]: https://addons.mozilla.org/firefox/addon/tabo
 [license]: ./LICENSE
