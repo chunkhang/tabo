@@ -68,7 +68,7 @@ No.
 ### Is there something wrong with the versioning?
 No.
 
-### How do I search for a particular session?
+### Why is there no search function for sessions?
 Press \<cmd/ctrl\>\<f\>.
 
 ### When is settings going to be implemented?
