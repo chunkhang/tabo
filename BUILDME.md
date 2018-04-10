@@ -11,12 +11,13 @@ None
 ## Dependencies
 - [node](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
+- [yarn](https://yarnpkg.com/en/)
 - [web-ext](https://www.npmjs.com/package/web-ext)
 
 ## Building
 
 ```
-$ npm install
+$ yarn install
 $ npm run build
 ```
 
