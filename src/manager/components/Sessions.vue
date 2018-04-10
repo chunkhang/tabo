@@ -30,11 +30,13 @@ export default {
       actions: {
         "Remove": {
           handle: this.handleRemove,
+          title: "Hotkey: <shift>",
           active: false,
           disabled: true
         },
         "Clear All": {
           handle: this.handleClearAll,
+          title: "",
           active: false,
           disabled: true
         }

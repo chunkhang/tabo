@@ -8,6 +8,7 @@
       <li v-for="(action, name) in actions">
         <p
           @click="action.handle()"
+          :title="action.title"
           :class="
             [
               'has-text-weight-normal clickable',

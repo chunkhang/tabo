@@ -30,6 +30,7 @@ export default {
       actions: {
         "Save": {
           handle: this.handleSave,
+          title: "Hotkey: <space>",
           active: false,
           disabled: true
         }
