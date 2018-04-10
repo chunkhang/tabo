@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 
-@import "~bulma/css/bulma.css";
+@import "./bulma.css";
 @import "./variables.scss";
 
 body {
