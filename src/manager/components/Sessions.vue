@@ -110,7 +110,7 @@ export default {
     // Open session
     openSession: function(index) {
       // Open tabs under session
-      var urls = this.items[index].tabs.map(tab => tab.url);
+      var urls = this.sessionItems[index].tabs.map(tab => tab.url);
       browser.windows.create({
         url: urls
       });

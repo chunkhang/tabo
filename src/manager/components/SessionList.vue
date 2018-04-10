@@ -74,7 +74,7 @@ export default {
   methods: {
     // Handler function for click on session name
     handleClickName: function(index) {
-      Bus.$emit("sessions-open");
+      Bus.$emit("sessions-open", index);
     },
     // Handler function for click on session number of tabs
     handleClickTab: function(index) {
