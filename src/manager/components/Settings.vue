@@ -24,7 +24,7 @@ export default {
           handle: this.handleAbout,
           title: "",
           active: false,
-          disabled: true
+          disabled: false
         }
       },
       text: "Coming soon."
