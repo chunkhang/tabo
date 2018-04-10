@@ -9,8 +9,9 @@ macOS High Sierra (Version 10.13.3)
 None
 
 ## Dependencies
-- node
-- npm
+- [node](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [web-ext](https://www.npmjs.com/package/web-ext)
 
 ## Building
 
