@@ -5,7 +5,7 @@ const path = require('path');
 const zipFolder = require('zip-folder');
 
 const DEST_DIR = path.join(__dirname, '../dist');
-const DEST_ZIP_DIR = path.join(__dirname, '../dist-zip'); 
+const DEST_ZIP_DIR = path.join(__dirname, '../releases'); 
 
 const extractExtensionData = () => {
   const extPackageJson = require('../package.json');

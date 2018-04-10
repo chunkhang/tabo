@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Distributable
+rm -rf dist
+npm run build
+npm run build-zip
+rm -rf dist
+
+# Source code
+mkdir ../tabo-src
+rsync -a --progress . ../tabo-src --exclude-from=.gitignore --exclude={.git/,.gitignore,pack,README.md}
+cd ../tabo-src
+mv BUILDME.md README.md
+zip -r ../tabo-src.zip .
+cd ..
+rm -rf tabo-src
+mv tabo-src.zip tabo/releases
