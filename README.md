@@ -86,7 +86,7 @@ Feel free to suggest features or report bugs.
 **Marcus Mu** chunkhang@gmail.com
 
 [version-badge]: https://img.shields.io/amo/v/tabo.svg
-[screenshot]: https://user-images.githubusercontent.com/12708862/38530672-68db0704-3c9e-11e8-8572-ad83e4f9b3da.png
+[screenshot]: https://user-images.githubusercontent.com/12708862/38571624-981505b2-3d23-11e8-94e5-42ee80269ffc.png
 [get-add-on-button]: https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_2.png
 [add-on-page]: https://addons.mozilla.org/firefox/addon/tabo
 [license]: ./LICENSE
