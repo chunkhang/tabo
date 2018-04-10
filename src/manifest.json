@@ -4,6 +4,12 @@
   "version": "1.0.0",
   "manifest_version": 2,
 
+  "applications": {
+      "gecko": {
+          "id": "tabo@chunkhang.com"
+      }
+  },
+
   "developer": {
     "name": "Marcus Mu",
     "url": "https://github.com/chunkhang"
