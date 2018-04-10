@@ -26,6 +26,7 @@ export default {
       title: "Sessions",
       sessionItems: [],
       removingSessionItems: false,
+      savingSession: false,
       actions: {
         "Remove": {
           handle: this.handleRemove,
@@ -38,15 +39,25 @@ export default {
           disabled: true
         }
       },
-      fallbackText: "Nothing here. Try saving from Tabs."
+      fallbackText: "Nothing here. Try saving from Tabs.",
     }
   },
   created: function() {
-    // Hotkey
+    // Load saved sessions from storage
     var vue = this;
+    browser.storage.local.get("sessions").then(function(results) {
+      if (Object.keys(results).length != 0) {
+        vue.sessionItems = results.sessions;
+      }
+      if (vue.sessionItems.length >= 1) {
+        Bus.$emit("sessions-enable-remove");
+        Bus.$emit("sessions-enable-clear-all");
+      }
+    });
+    // Hotkey
     window.addEventListener("keydown", function(event) {
       // Shift
-      if (event.keyCode == 16) {
+      if (event.keyCode == 16 && !vue.savingSession) {
         vue.handleRemove();
       }
     });
@@ -71,6 +82,12 @@ export default {
     });
     Bus.$on("sessions-disable-clear-all", function() {
       vue.actions["Clear All"].disabled = true;
+    });
+    Bus.$on("sessions-saving", function() {
+      vue.savingSession = true;
+    });
+    Bus.$on("sessions-saving-done", function() {
+      vue.savingSession = false;
     });
   },
   methods: {
@@ -99,7 +116,6 @@ export default {
     // Save new session
     saveSession: function(sessionName, tabItems) {
       // Add session to session items
-      var vue = this;
       var sessionItem = {
         date: Helper.getDateNow(),
         time: Helper.getTimeNow(),
@@ -107,11 +123,11 @@ export default {
         tabs: tabItems,
         hide: false
       };
-      vue.sessionItems.unshift(sessionItem);
+      this.sessionItems.unshift(sessionItem);
       // Enable actions
       Bus.$emit("sessions-enable-remove");
       Bus.$emit("sessions-enable-clear-all");
-      // Helper.storeSessions(vue.sessionItems);
+      Helper.storeSessions(this.sessionItems);
     },
     // Remove session
     removeSession: function(index) {
@@ -126,7 +142,7 @@ export default {
         // Cancel removing action
         Bus.$emit("sessions-stop-removing");
       }
-      // Helper.storeSessions(vue.sessionItems);
+      Helper.storeSessions(this.sessionItems);
     },
     // Clear sessions
     clearSessions: function() {
@@ -137,7 +153,7 @@ export default {
       Bus.$emit("sessions-disable-clear-all");
       // Cancel removing action
       Bus.$emit("sessions-stop-removing");
-      // Helper.storeSessions(vue.sessionItems);
+      Helper.storeSessions(this.sessionItems);
     }
   }
 }
