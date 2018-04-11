@@ -38,7 +38,6 @@ export default {
     hideCard: function() {
       card.classList.remove("is-active");
       Bus.$emit("tabs-deactivate-save");
-      Bus.$emit("sessions-saving-done");
     },
     // Handler function for enter keypress
     handleEnter: function() {

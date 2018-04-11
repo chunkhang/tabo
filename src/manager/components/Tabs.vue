@@ -107,7 +107,6 @@ export default {
         cardInput.value = "";
         cardInput.focus();
         this.actions["Save"].active = true;
-        Bus.$emit("sessions-saving");
       }
     }
   }

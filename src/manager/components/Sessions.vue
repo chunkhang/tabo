@@ -26,11 +26,10 @@ export default {
       title: "Sessions",
       sessionItems: [],
       editingSessionItems: false,
-      savingSession: false,
       actions: {
         "Edit": {
           handle: this.handleEdit,
-          title: "Hotkey: <shift>",
+          title: "",
           active: false,
           disabled: true
         },
@@ -56,13 +55,6 @@ export default {
         Bus.$emit("sessions-enable-clear-all");
       }
     });
-    // Hotkey
-    window.addEventListener("keydown", function(event) {
-      // Shift
-      if (event.keyCode == 16 && !vue.savingSession) {
-        vue.handleEdit();
-      }
-    });
   },
   mounted: function() {
     var vue = this;
@@ -84,12 +76,6 @@ export default {
     });
     Bus.$on("sessions-disable-clear-all", function() {
       vue.actions["Clear All"].disabled = true;
-    });
-    Bus.$on("sessions-saving", function() {
-      vue.savingSession = true;
-    });
-    Bus.$on("sessions-saving-done", function() {
-      vue.savingSession = false;
     });
   },
   methods: {
