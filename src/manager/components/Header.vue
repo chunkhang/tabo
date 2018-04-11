@@ -2,7 +2,7 @@
 
   <div>
     <h1 class="title is-4">
-      {{ title }} <span v-if="items">({{ items.length }})</span>
+      {{ title }}
     </h1>
     <ul>
       <li v-for="(action, name) in actions">
@@ -30,8 +30,7 @@
 export default {
   props: [
     "title",
-    "actions",
-    "items"
+    "actions"
   ]
 }
 

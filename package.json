@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "vue": "^2.5.13",
+    "vuex": "^3.0.1",
     "web-ext": "^2.6.0"
   },
   "devDependencies": {

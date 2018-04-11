@@ -13,15 +13,15 @@
 
 <script>
 
-import Tabs from "./components/Tabs.vue";
 import Sessions from "./components/Sessions.vue"
-import Settings from "./components/Settings.vue";
+import Tabs from "./components/Tabs.vue";
+// import Settings from "./components/Settings.vue";
 
 export default {
   components: {
-    Tabs,
     Sessions,
-    Settings
+    Tabs,
+    // Settings
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
 
   <ul>
-    <li v-for="item in items">
+    <li v-for="item in tabs">
       <div>
         <img :src="item.favicon">
         <span>
@@ -20,9 +20,11 @@
 <script>
 
 export default {
-  props: [
-    "items"
-  ]
+  computed: {
+    tabs() {
+      return this.$store.getters.getTabs;
+    }
+  }
 }
 
 </script>
