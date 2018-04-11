@@ -3,7 +3,7 @@
   <div class="column">
     <Header :title="title" :items="sessionItems" :actions="actions"/>
     <hr>
-    <SessionList :items="sessionItems" :removing="removingSessionItems"/>
+    <SessionList :items="sessionItems" :editing="editingSessionItems"/>
     <p v-if="sessionItems.length == 0">{{ fallbackText }}</p>
   </div>
 
@@ -25,11 +25,11 @@ export default {
     return {
       title: "Sessions",
       sessionItems: [],
-      removingSessionItems: false,
+      editingSessionItems: false,
       savingSession: false,
       actions: {
-        "Remove": {
-          handle: this.handleRemove,
+        "Edit": {
+          handle: this.handleEdit,
           title: "Hotkey: <shift>",
           active: false,
           disabled: true
@@ -52,7 +52,7 @@ export default {
         vue.sessionItems = results.sessions;
       }
       if (vue.sessionItems.length >= 1) {
-        Bus.$emit("sessions-enable-remove");
+        Bus.$emit("sessions-enable-edit");
         Bus.$emit("sessions-enable-clear-all");
       }
     });
@@ -60,7 +60,7 @@ export default {
     window.addEventListener("keydown", function(event) {
       // Shift
       if (event.keyCode == 16 && !vue.savingSession) {
-        vue.handleRemove();
+        vue.handleEdit();
       }
     });
   },
@@ -69,18 +69,18 @@ export default {
     Bus.$on("sessions-open", vue.openSession);
     Bus.$on("sessions-save", vue.saveSession);
     Bus.$on("sessions-remove", vue.removeSession);
-    Bus.$on("sessions-enable-remove", function() {
-      vue.actions["Remove"].disabled = false;
+    Bus.$on("sessions-enable-edit", function() {
+      vue.actions["Edit"].disabled = false;
     });
-    Bus.$on("sessions-stop-removing", function() {
-      vue.actions["Remove"].active = false;
-      vue.removingSessionItems = false;
+    Bus.$on("sessions-stop-editing", function() {
+      vue.actions["Edit"].active = false;
+      vue.editingSessionItems = false;
     });
     Bus.$on("sessions-enable-clear-all", function() {
       vue.actions["Clear All"].disabled = false;
     });
-    Bus.$on("sessions-disable-remove", function() {
-      vue.actions["Remove"].disabled = true;
+    Bus.$on("sessions-disable-edit", function() {
+      vue.actions["Edit"].disabled = true;
     });
     Bus.$on("sessions-disable-clear-all", function() {
       vue.actions["Clear All"].disabled = true;
@@ -93,12 +93,12 @@ export default {
     });
   },
   methods: {
-    // Handler function for remove action
-    handleRemove: function() {
-      if (!this.actions["Remove"].disabled) {
-        // Toggle removing sessions
-        this.actions["Remove"].active = !this.actions["Remove"].active;
-        this.removingSessionItems = !this.removingSessionItems;
+    // Handler function for edit action
+    handleEdit: function() {
+      if (!this.actions["Edit"].disabled) {
+        // Toggle editing sessions
+        this.actions["Edit"].active = !this.actions["Edit"].active;
+        this.editingSessionItems = !this.editingSessionItems;
       }
     },
     // Handler function for clear all action
@@ -127,7 +127,7 @@ export default {
       };
       this.sessionItems.unshift(sessionItem);
       // Enable actions
-      Bus.$emit("sessions-enable-remove");
+      Bus.$emit("sessions-enable-edit");
       Bus.$emit("sessions-enable-clear-all");
       Helper.storeSessions(this.sessionItems);
     },
@@ -136,13 +136,13 @@ export default {
       // Remove session item
       this.sessionItems.splice(index, 1);
       if (this.sessionItems.length == 0) {
-        // Deactivate remove action
-        this.actions["Remove"].active = false;
+        // Deactivate edit action
+        this.actions["Edit"].active = false;
         // Disable actions
-        Bus.$emit("sessions-disable-remove");
+        Bus.$emit("sessions-disable-edit");
         Bus.$emit("sessions-disable-clear-all");
-        // Cancel removing action
-        Bus.$emit("sessions-stop-removing");
+        // Cancel editing action
+        Bus.$emit("sessions-stop-editing");
       }
       Helper.storeSessions(this.sessionItems);
     },
@@ -151,10 +151,10 @@ export default {
       // Empty session items
       this.sessionItems = [];
       // Disable actions
-      Bus.$emit("sessions-disable-remove");
+      Bus.$emit("sessions-disable-edit");
       Bus.$emit("sessions-disable-clear-all");
-      // Cancel removing action
-      Bus.$emit("sessions-stop-removing");
+      // Cancel editing action
+      Bus.$emit("sessions-stop-editing");
       Helper.storeSessions(this.sessionItems);
     }
   }

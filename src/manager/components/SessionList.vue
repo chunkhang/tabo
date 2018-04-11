@@ -6,7 +6,14 @@
       :class="['items', {'hide': item.hide}]"
     >
       <div>
+        <input
+          v-if="editing"
+          class="input has-text-weight-normal"
+          :value="item.name"
+          type="text"
+          :placeholder="placeholderText">
         <p
+          v-if="!editing"
           @click="handleClickName(index)"
           class="has-text-weight-normal clickable"
         >{{ item.name }}</p>
@@ -19,7 +26,7 @@
         </p>
       </div>
       <p
-        v-if="removing"
+        v-if="editing"
         @click="handleClickCross(index)"
         class="crosses has-text-weight-normal"
       >x</p>
@@ -43,12 +50,13 @@ export default {
   },
   data: function() {
     return {
-      showingTabs: false
+      showingTabs: false,
+      placeholderText: "Enter something..."
     }
   },
   props: [
     "items",
-    "removing"
+    "editing"
   ],
   created: function() {
     // Hotkey
@@ -84,16 +92,16 @@ export default {
         this.items[index].hide = false;
         // Disable actions
         Bus.$emit("tabs-disable-save");
-        Bus.$emit("sessions-disable-remove");
+        Bus.$emit("sessions-disable-edit");
         Bus.$emit("sessions-disable-clear-all");
-        // Cancel removing action
-        Bus.$emit("sessions-stop-removing");
+        // Cancel editing action
+        Bus.$emit("sessions-stop-editing");
       } else {
         // Show all sessions
         this.items.forEach(item => item.hide = false);
         // Enable actions
         Bus.$emit("tabs-enable-save");
-        Bus.$emit("sessions-enable-remove");
+        Bus.$emit("sessions-enable-edit");
         Bus.$emit("sessions-enable-clear-all");
       }
       // Show or hide tabs for session
@@ -118,13 +126,33 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 
-  .subtitles {
-    margin-top: 3px;
-    font-size: $small-font;
-    color: $grey;
+  div {
+    width: 85%;
 
-    span {
+    .input {
+      background-color: $black;
       color: $white;
+      border: 1px solid $grey;
+      box-shadow: none;
+      border-radius: 0;
+      font-size: $medium-font;
+      padding: 10px;
+      margin-bottom: 3px;
+      &::-moz-placeholder {
+        font-size: $medium-font;
+        color: $grey;
+      }
+    }
+
+    .subtitles {
+      margin-top: 3px;
+      font-size: $small-font;
+      color: $grey;
+
+      span {
+        color: $white;
+      }
+
     }
 
   }
