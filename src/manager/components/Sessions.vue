@@ -55,6 +55,13 @@ export default {
         Bus.$emit("sessions-enable-clear-all");
       }
     });
+    // Hotkey
+    window.addEventListener("keydown", function(event) {
+      // Escape
+      if (event.keyCode == 27 && vue.editingSessionItems) {
+        Bus.$emit("sessions-stop-editing");
+      }
+    });
   },
   mounted: function() {
     var vue = this;
@@ -67,6 +74,7 @@ export default {
     Bus.$on("sessions-stop-editing", function() {
       vue.actions["Edit"].active = false;
       vue.editingSessionItems = false;
+      Helper.storeSessions(vue.sessionItems);
     });
     Bus.$on("sessions-enable-clear-all", function() {
       vue.actions["Clear All"].disabled = false;

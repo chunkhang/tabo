@@ -8,6 +8,7 @@
       <div>
         <input
           v-if="editing"
+          v-model="item.name"
           class="input has-text-weight-normal"
           :value="item.name"
           type="text"
