@@ -3,8 +3,8 @@
   <section class="section">
     <div class="container">
       <div class="columns is-6 is-variable">
-        <Tabs/>
         <Sessions/>
+        <Tabs/>
         <Settings/>
     </div>
   </section>
