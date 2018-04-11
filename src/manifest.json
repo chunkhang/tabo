@@ -22,6 +22,14 @@
     "96": "icons/icon.svg"
   },
 
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up"
+      }
+    }
+  },
+
   "permissions": [
     "tabs",
     "storage",
@@ -35,6 +43,7 @@
   },
 
   "browser_action": {
+    "browser_style": false,
     "default_title": "Tabo",
     "default_icon": {
       "16": "icons/icon.svg",
