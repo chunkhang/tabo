@@ -2,8 +2,8 @@
 
   <ul id="sessionList">
     <li
-      v-for="(item, index) in items"
-      :class="['items', {'hide': item.hide}]"
+      v-for="(item, index) in sessions"
+      class="items"
     >
       <div>
         <input
@@ -12,7 +12,7 @@
           class="input has-text-weight-normal"
           :value="item.name"
           type="text"
-          :placeholder="placeholderText">
+          :placeholder="text">
         <p
           v-if="!editing"
           @click="handleClickName(index)"
@@ -21,7 +21,7 @@
         <p class="subtitles has-text-weight-light">
           <span
             @click="handleClickTab(index)"
-           :class="['clickable', {'active': showingTabs}]"
+            class="clickable"
           >{{ item.tabs.length | pluralize }}</span>
           @ {{ item.date }} {{ item.time }}
         </p>
@@ -31,10 +31,6 @@
         @click="handleClickCross(index)"
         class="crosses has-text-weight-normal"
       >x</p>
-      <div :class="['tabLists', {'hide': !showingTabs}]">
-        <hr>
-        <TabList :items="item.tabs"/>
-      </div>
     </li>
   </ul>
 
@@ -42,37 +38,36 @@
 
 <script>
 
-import Bus from "../EventBus.js";
-import TabList from "./TabList.vue";
+import Bus from "../Bus.js";
 
 export default {
-  components: {
-    TabList
-  },
-  data: function() {
-    return {
-      showingTabs: false,
-      placeholderText: "Enter something..."
+  computed: {
+    sessions() {
+      return this.$store.getters.getSessions;
+    },
+    editing() {
+      return false;
     }
   },
-  props: [
-    "items",
-    "editing"
-  ],
-  created: function() {
-    // Hotkey
-    var vue = this;
-    window.addEventListener("keydown", function(event) {
-      // Escape
-      if (event.keyCode == 27) {
-        if (vue.showingTabs) {
-          vue.handleClickTab();
-        }
-      }
-    });
+  data() {
+    return {
+      text: "Enter something..."
+    }
+  },
+  created() {
+    // // Hotkey
+    // var vue = this;
+    // window.addEventListener("keydown", function(event) {
+    //   // Escape
+    //   if (event.keyCode == 27) {
+    //     if (vue.showingTabs) {
+    //       vue.handleClickTab();
+    //     }
+    //   }
+    // });
   },
   filters: {
-    pluralize: function(count) {
+    pluralize(count) {
       var noun = "tab";
       if (count > 1) {
         noun += "s";
@@ -81,37 +76,34 @@ export default {
     }
   },
   methods: {
-    // Handler function for click on session name
-    handleClickName: function(index) {
-      Bus.$emit("sessions-open", index);
-    },
-    // Handler function for click on session number of tabs
-    handleClickTab: function(index) {
-      if (!this.showingTabs) {
-        // Show only clicked session
-        this.items.forEach(item => item.hide = true);
-        this.items[index].hide = false;
-        // Disable actions
-        Bus.$emit("tabs-disable-save");
-        Bus.$emit("sessions-disable-edit");
-        Bus.$emit("sessions-disable-clear-all");
-        // Cancel editing action
-        Bus.$emit("sessions-stop-editing");
-      } else {
-        // Show all sessions
-        this.items.forEach(item => item.hide = false);
-        // Enable actions
-        Bus.$emit("tabs-enable-save");
-        Bus.$emit("sessions-enable-edit");
-        Bus.$emit("sessions-enable-clear-all");
-      }
-      // Show or hide tabs for session
-      this.showingTabs = !this.showingTabs;
-    },
-    // Handler function for click on session cross
-    handleClickCross: function(index) {
-      Bus.$emit("sessions-remove", index);
-    }
+    // handleClickName(index) {
+    //   Bus.$emit("sessions-open", index);
+    // },
+    // handleClickTab(index) {
+    //   if (!this.showingTabs) {
+    //     // Show only clicked session
+    //     this.items.forEach(item => item.hide = true);
+    //     this.items[index].hide = false;
+    //     // Disable actions
+    //     Bus.$emit("tabs-disable-save");
+    //     Bus.$emit("sessions-disable-edit");
+    //     Bus.$emit("sessions-disable-clear-all");
+    //     // Cancel editing action
+    //     Bus.$emit("sessions-stop-editing");
+    //   } else {
+    //     // Show all sessions
+    //     this.items.forEach(item => item.hide = false);
+    //     // Enable actions
+    //     Bus.$emit("tabs-enable-save");
+    //     Bus.$emit("sessions-enable-edit");
+    //     Bus.$emit("sessions-enable-clear-all");
+    //   }
+    //   // Show or hide tabs for session
+    //   this.showingTabs = !this.showingTabs;
+    // },
+    // handleClickCross(index) {
+    //   Bus.$emit("sessions-remove", index);
+    // }
   }
 }
 
@@ -153,9 +145,7 @@ export default {
       span {
         color: $white;
       }
-
     }
-
   }
 
   .crosses {
@@ -174,14 +164,6 @@ export default {
     }
   }
 
-  .tabLists {
-    flex-basis: 100%;
-  }
-
-}
-
-.hide {
-  display: none !important;
 }
 
 </style>

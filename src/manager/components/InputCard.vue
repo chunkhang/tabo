@@ -1,19 +1,18 @@
 <template>
 
   <div class="modal" id="card">
-    <div class="modal-background" @click="hideCard()"></div>
+    <div class="modal-background" @click="handleClick()"></div>
     <div class="modal-card">
       <section class="modal-card-body">
         <div class="field">
           <div class="control">
             <input
-              ref="nameInput"
               @keyup.enter="handleEnter()"
-              @keyup.esc="hideCard()"
+              @keyup.esc="handleEscape()"
               id="cardInput"
               class="input has-text-weight-normal"
               type="text"
-              :placeholder="placeholderText">
+              :placeholder="text">
           </div>
         </div>
       </section>
@@ -24,29 +23,50 @@
 
 <script>
 
-import Bus from "../EventBus.js";
-import Helper from "../Helper.js";
+import Bus from "../Bus.js";
 
 export default {
-  data: function() {
+  data() {
     return {
-      placeholderText: "Name the session...",
+      text: "Name the session...",
     }
   },
+  mounted() {
+    Bus.$on("open-card", this.showCard);
+  },
   methods: {
-    // Hide input card
-    hideCard: function() {
-      card.classList.remove("is-active");
-      Bus.$emit("tabs-deactivate-save");
+    showCard() {
+      card.classList.add("is-active");
+      cardInput.focus();
+      this.toggleShowingCard();
     },
-    // Handler function for enter keypress
-    handleEnter: function() {
+    hideCard() {
+      card.classList.remove("is-active");
+      cardInput.value = "";
+      this.toggleShowingCard();
+    },
+    handleEnter() {
       var name = cardInput.value.trim();
       if (name != "") {
-        name = Helper.capitalize(name);
-        Bus.$emit("tabs-save", name);
+        this.addSession(name);
         this.hideCard();
       }
+    },
+    handleEscape() {
+      this.hideCard();
+    },
+    handleClick() {
+      this.hideCard();
+    },
+    addSession(name) {
+      var session = {
+        name: name,
+        tabs: this.$store.getters.getTabs
+      };
+      this.$store.dispatch("addSession", session);
+    },
+    toggleShowingCard() {
+      this.$store.dispatch("toggleShowingCard");
     }
   }
 }

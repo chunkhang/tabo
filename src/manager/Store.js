@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Helper from "./Helper.js";
+import LocalStorage from "./LocalStorage.js";
 
 Vue.use(Vuex);
 
@@ -8,7 +9,7 @@ Vue.use(Vuex);
 var state = {
   sessions: [],
   tabs: [],
-  actions: []
+  showingCard: false
 };
 
 // Getters
@@ -18,6 +19,9 @@ var getters = {
   },
   getTabs(state) {
     return state.tabs;
+  },
+  getShowingCard(state) {
+    return state.showingCard;
   }
 };
 
@@ -29,9 +33,10 @@ var mutations = {
       tabs: payload.tabs,
       date: Helper.getDateNow(),
       time: Helper.getTimeNow(),
-      hide: false
+      // hide: false
     };
     state.sessions.unshift(item);
+    LocalStorage.sessions.save(state.sessions);
   },
   TOGGLE_SESSION(state, payload) {
     var item = state.sessions[payload];
@@ -39,9 +44,11 @@ var mutations = {
   },
   DELETE_SESSION(state, payload) {
     state.sessions.splice(payload, 1);
+    LocalStorage.sessions.save(state.sessions);
   },
   CLEAR_SESSIONS(state) {
     state.sessions = [];
+    LocalStorage.sessions.save(state.sessions);
   },
   ADD_TAB(state, payload) {
     var item = {
@@ -56,6 +63,9 @@ var mutations = {
   },
   CLEAR_TABS(state) {
     state.tabs = [];
+  },
+  TOGGLE_SHOWING_CARD(state) {
+    state.showingCard = !state.showingCard;
   }
 };
 
@@ -81,6 +91,9 @@ var actions = {
   },
   clearTabs(context) {
     context.commit("CLEAR_TABS");
+  },
+  toggleShowingCard(context) {
+    context.commit("TOGGLE_SHOWING_CARD");
   }
 };
 

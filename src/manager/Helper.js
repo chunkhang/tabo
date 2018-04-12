@@ -6,14 +6,14 @@ function formatDigit(number) {
 }
 
 var Helper = {
-  capitalize: function(text) {
+  capitalize(text) {
     var words = text.split(" ");
-    words = words.map(function(word) {
+    words = words.map(word => {
       return word[0].toUpperCase() + word.slice(1);
     });
     return words.join(" ");
   },
-  getDateNow: function() {
+  getDateNow() {
     var today = new Date();
     var date = [
       today.getFullYear(),
@@ -22,7 +22,7 @@ var Helper = {
     ].map(formatDigit);
     return date.join("/");
   },
-  getTimeNow: function() {
+  getTimeNow() {
     var today = new Date();
     var time = [
       today.getHours(),
@@ -30,14 +30,6 @@ var Helper = {
       today.getSeconds()
     ].map(formatDigit);
     return time.join(":");
-  },
-  storeSessions: function(sessions) {
-    var items = JSON.parse(JSON.stringify(sessions));
-    items = items.map(function(item) {
-      item.remove = false;
-      return item;
-    });
-    browser.storage.local.set({"sessions": items});
   }
 };
 

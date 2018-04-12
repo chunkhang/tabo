@@ -5,17 +5,14 @@
       {{ title }}
     </h1>
     <ul>
-      <li v-for="(action, name) in actions">
+      <li v-for="(item, name) in actions">
         <p
-          @click="action.handle()"
-          :title="action.title"
+          @click="item.handle()"
+          :title="item.tip"
           :class="
             [
               'has-text-weight-normal clickable',
-              {
-                'active': action.active,
-                'disabled': action.disabled
-              }
+              {'disabled': item.disabled}
             ]
           "
         >{{ name }}</p>
